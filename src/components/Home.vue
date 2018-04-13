@@ -14,7 +14,6 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'My Personal Dictionary',
       word: ''
     }
   },
