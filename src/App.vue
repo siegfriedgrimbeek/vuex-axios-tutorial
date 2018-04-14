@@ -27,6 +27,9 @@ export default {
 <style lang="scss">
 body {
   overflow: hidden;
+  a {
+    color: royalblue;
+  }
 }
 
 #app {

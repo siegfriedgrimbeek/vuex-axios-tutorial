@@ -5,7 +5,7 @@
       <div class="wordlist">
         <ul>
           <li v-for="(word, index) in words" :key="index">
-            <router-link v-bind:to="{ name: 'Word', params: { id: index, word: word } }">{{ word }}</router-link>
+            <router-link v-bind:to="{ name: 'Word', params: { id: word, word: word } }">{{ word }}</router-link>
           </li>
         </ul>
       </div>
