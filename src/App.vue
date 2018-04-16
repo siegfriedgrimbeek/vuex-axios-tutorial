@@ -2,7 +2,7 @@
   <div id="app">
     <div id="header-nav" class="nav-bars">
         <router-link to="/">Home</router-link> |
-        <router-link to="/words">Words</router-link> |
+        <router-link to="/words">Words</router-link> <span v-if="latestWord">|</span>
         <router-link :to="latestWord">{{ latestWord }}</router-link>
     </div>
     <router-view/>
@@ -15,10 +15,18 @@
 <script>
 export default {
   name: 'App',
-  data () {
-    return {
-      wordCount: 0,
-      latestWord: 'Latest_Word'
+  computed: {
+    wordCount () {
+      console.log(this.$store)
+      return this.$store.state.words.length
+    },
+    latestWord () {
+      let words = this.$store.state.words
+      if (words.length > 0) {
+        return words[words.length - 1]
+      } else {
+        return ''
+      }
     }
   }
 }

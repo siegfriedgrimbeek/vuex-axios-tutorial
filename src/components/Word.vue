@@ -49,6 +49,7 @@ export default {
       let data = response.data.result
       this.partOfSpeech = data.part_of_speech
       this.senses = data.senses
+      console.log(response)
     }
   }
 }
@@ -135,7 +136,7 @@ export default {
 
   blockquote:before {
     color: #ccc;
-    content: open-quote;
+    content:'\201C';
     font-size: 4em;
     line-height: 0.1em;
     margin-right: 0.25em;

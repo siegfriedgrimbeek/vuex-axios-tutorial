@@ -46,14 +46,14 @@ export default {
     align-items: center;
 
     h2{
-      flex: 0 0 15%;
+      flex: 0 0 25%;
       margin-top: 10px;
       text-align: center;
     }
 
     .wordlist {
       overflow: auto;
-      flex: 0 0 85%;
+      flex: 0 0 75%;
 
       ul {
         list-style: none;

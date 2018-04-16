@@ -36,6 +36,8 @@ export default {
   methods: {
     async getWord () {
       if (this.word === '') {
+        this.wordMeaning = 'Please enter a word.'
+        this.wordData = ''
         return false
       }
       const response = await WordService.getWord({
