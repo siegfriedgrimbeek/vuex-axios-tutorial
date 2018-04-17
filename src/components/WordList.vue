@@ -5,7 +5,7 @@
       <div class="wordlist">
         <ul>
           <li v-for="(word, index) in words" :key="index">
-            <router-link v-bind:to="{ name: 'Word', params: { id: word, word: word } }">{{ word }}</router-link>
+            <router-link v-bind:to="{ name: 'Word', params: { id: word.headword , word: word.headword, data:word} }">{{ word.headword }}</router-link>
           </li>
         </ul>
       </div>
@@ -16,9 +16,9 @@
 <script>
 export default {
   name: 'WordList',
-  data () {
-    return {
-      words: ['test', 'compare', 'exercise', 'judge', 'matters', 'mouse', 'cycle']
+  computed: {
+    words () {
+      return this.$store.state.words
     }
   }
 }
@@ -26,15 +26,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.items {
-  .item {
-    background: #e0ddd5;
-    color: #171e42;
-    box-sizing: border-box;
-    padding: 10px;
-  }
-}
-
 .wordlist-container{
   margin-top: 60px;
 
@@ -75,7 +66,7 @@ export default {
           padding: 10px;
           margin-left: 10px;
           margin-top: 10px;
-          max-width: 250px;
+          width: 200px;
 
           a {
             color: white;

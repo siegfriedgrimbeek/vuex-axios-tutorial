@@ -5,7 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    wordCount: 0,
     words: []
+  },
+  mutations: {
+    addWord (state, word) {
+      state.words.push(word)
+    }
   }
 })

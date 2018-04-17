@@ -27,10 +27,18 @@ export default {
   data () {
     return {
       word: '',
-      wordData: '',
-      wordMeaning: '',
-      wordPart: '',
-      wordPronounciation: ''
+      wordData: ''
+    }
+  },
+  computed: {
+    wordMeaning () {
+      if (this.wordData) {
+        return this.wordData.senses[0].definition
+      }
+      return ''
+    },
+    words () {
+      return this.$store.state.words
     }
   },
   methods: {
@@ -53,7 +61,10 @@ export default {
       }
 
       this.wordData = responses[0]
-      this.wordMeaning = responses[0].senses[0].definition
+      let words = this.words
+      if (!words.filter(word => word.headword === this.word).length > 0) {
+        this.$store.commit('addWord', this.wordData)
+      }
     }
   }
 }

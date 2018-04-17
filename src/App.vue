@@ -2,8 +2,8 @@
   <div id="app">
     <div id="header-nav" class="nav-bars">
         <router-link to="/">Home</router-link> |
-        <router-link to="/words">Words</router-link> <span v-if="latestWord">|</span>
-        <router-link :to="latestWord">{{ latestWord }}</router-link>
+        <router-link to="/words">Words</router-link> <span v-if="latestWord">| Latest Word: </span>
+        <router-link v-bind:to="{ name: 'Word', params: { id: latestWord, word: latestWord, data:latestWordData } }">{{latestWord | capitalize}}</router-link>
     </div>
     <router-view/>
     <div id="footer-nav" class="nav-bars">
@@ -16,17 +16,28 @@
 export default {
   name: 'App',
   computed: {
+    words () {
+      return this.$store.state.words
+    },
     wordCount () {
-      console.log(this.$store)
-      return this.$store.state.words.length
+      return this.words.length
+    },
+    latestWordData () {
+      if (this.words.length > 0) {
+        return this.words[this.words.length - 1]
+      }
     },
     latestWord () {
-      let words = this.$store.state.words
-      if (words.length > 0) {
-        return words[words.length - 1]
-      } else {
-        return ''
+      if (this.latestWordData) {
+        return this.latestWordData.headword
       }
+    }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   }
 }
