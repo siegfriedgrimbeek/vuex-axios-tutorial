@@ -18,7 +18,7 @@ export default {
   name: 'WordList',
   computed: {
     words () {
-      return this.$store.state.words
+      return this.$store.state.words.slice().reverse()
     }
   }
 }
