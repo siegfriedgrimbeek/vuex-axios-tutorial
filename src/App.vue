@@ -3,7 +3,7 @@
     <div id="header-nav" class="nav-bars">
         <router-link to="/">Home</router-link> |
         <router-link to="/words">Words</router-link> <span v-if="latestWord">| Latest Word: </span>
-        <router-link v-bind:to="{ name: 'Word', params: { id: latestWord, word: latestWord, data:latestWordData } }">{{latestWord | capitalize}}</router-link>
+        <router-link v-if="latestWord" v-bind:to="{ name: 'Word', params: { id: latestWord, word: latestWord, data:latestWordData } }">{{latestWord | capitalize}}</router-link>
     </div>
     <router-view/>
     <div id="footer-nav" class="nav-bars">

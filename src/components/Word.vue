@@ -1,7 +1,7 @@
 <template>
   <div class="wordlist-container">
     <div class="wordlist-columns">
-      <h2>{{ word }} <span v-if="partOfSpeech">[{{ partOfSpeech }}]</span>:</h2>
+        <h2>{{ word }} <span v-if="partOfSpeech">[{{ partOfSpeech }}]</span>:</h2>
       <div class="word-info">
         <ul class="words" v-if="senses">
           <li v-for="(sense, index) in senses" :key="index">
@@ -24,6 +24,7 @@
     <div class="nav-links">
         <router-link v-bind:to="{ name: 'Home'}">Home</router-link>
         <router-link v-bind:to="{ name: 'WordList'}">Word List</router-link>
+        <a href="#" @click="deleteWord(word)">Delete Word</a>
     </div>
   </div>
 </template>
@@ -34,14 +35,19 @@ export default {
   name: 'WordList',
   data () {
     return {
-      word: this.$route.params.id,
+      word: this.$route.params.word,
       wordId: this.$route.params.data.id,
-      partOfSpeech: '',
-      senses: ''
+      senses: '',
+      partOfSpeech: ''
     }
   },
   mounted () {
     this.getWordDetails(this.wordId)
+  },
+  computed: {
+    words () {
+      return this.$store.state.words
+    }
   },
   methods: {
     async getWordDetails (params) {
@@ -49,7 +55,10 @@ export default {
       let data = response.data.result
       this.partOfSpeech = data.part_of_speech
       this.senses = data.senses
-      console.log(response)
+    },
+    deleteWord (word) {
+      this.$store.commit('deleteWord', word)
+      this.$router.push({ name: 'Home' })
     }
   }
 }
@@ -117,7 +126,7 @@ export default {
         text-align: center;
         background-color: royalblue;
         -webkit-box-flex: 0;
-        flex: 0 0 47%;
+        flex: 0 0 31%;
         margin: 0 20px;
         box-sizing: border-box;
         display: block;

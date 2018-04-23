@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="word-meaning">
-        {{ wordMeaning }}
+        {{ wordMeaning || error }}
         <div class="word-links" v-if="wordData">
           <router-link v-bind:to="{ name: 'Word', params: { id: word, word: word, data:wordData } }">Read More</router-link>
           <router-link v-bind:to="{ name: 'WordList'}">Word List</router-link>
@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       word: '',
-      wordData: ''
+      wordData: '',
+      error: ''
     }
   },
   computed: {
@@ -44,7 +45,7 @@ export default {
   methods: {
     async getWord () {
       if (this.word === '') {
-        this.wordMeaning = 'Please enter a word.'
+        this.error = 'Please enter a word.'
         this.wordData = ''
         return false
       }
@@ -55,7 +56,7 @@ export default {
       let responses = response.data.results
 
       if (responses.length === 0) {
-        this.wordMeaning = 'Your word could not be found and was not added.'
+        this.error = 'Your word could not be found and was not added.'
         this.wordData = ''
         return false
       }
